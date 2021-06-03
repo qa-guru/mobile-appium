@@ -1,7 +1,8 @@
-package tests.browserstack;
+package tests.selenoid;
 
 import com.codeborne.selenide.Configuration;
-import drivers.BrowserstackMobileDriver;
+import drivers.LocalMobileDriver;
+import drivers.SelenoidMobileDriver;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -13,13 +14,13 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.Attach.getSessionId;
 
-public class BrowserStackTestBase {
+public class SelenoidTestBase {
 
     @BeforeAll
     public static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
 
-        Configuration.browser = BrowserstackMobileDriver.class.getName();
+        Configuration.browser = SelenoidMobileDriver.class.getName();
         Configuration.startMaximized = false;
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
@@ -36,10 +37,10 @@ public class BrowserStackTestBase {
 
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
+//        Attach.browserConsoleLogs();
 
         closeWebDriver();
 
         Attach.attachVideo(sessionId);
-
     }
 }

@@ -57,3 +57,17 @@ task selenide_android(type: Test) {
         includeTags 'selenide_android'
     }
 }
+
+task selenoid_android(type: Test) {
+    useJUnitPlatform {
+        includeTags 'selenide_android'
+    }
+    systemProperty "deviceFarm", "selenoid"
+}
+
+task browserstack_android(type: Test) {
+    useJUnitPlatform {
+        includeTags 'selenide_android'
+    }
+    systemProperty "deviceFarm", "browserstack"
+}
